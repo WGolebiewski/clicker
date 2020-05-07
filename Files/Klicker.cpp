@@ -7,9 +7,9 @@
 int main()
 {
     srand(time(0));
-    Ustaw set;
-    Punkty add;
+    SetOptions set;
+    Points add;
     set.isTrue();
     add.is();
-    add.dodaj();
+    add.add();
 }

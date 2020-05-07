@@ -8,10 +8,9 @@
 #include <sstream>
 #include <filesystem>
 #include "GameName.h"
-#include "Boss.h"
 
 
-void Punkty::wplac(int ile)
+void Points::payment(int ile)
 {
 	punkty.open("punkty.txt", std::ios::in);
 	std::string linia;
@@ -25,7 +24,7 @@ void Punkty::wplac(int ile)
 	system("cls");
 }
 
-int Punkty::howMuch()
+int Points::howMuch()
 {
 	punkty.open("punkty.txt", std::ios::in);
 	std::string str;
@@ -35,28 +34,26 @@ int Punkty::howMuch()
 	return pkt;
 }
 
-void Punkty::dodaj()
+void  Points::add()
 {
-	std::fstream bossik;
-	Botulek abcdef;
 	NameGame namee;
 	while (true)
 	{
-			howMuch();
-			system("cls");
-			// name the game
-			namee.NameGame::name();
-			std::cout << "\nIlosc klikniec: " << pkt << "\n";
-			std::cout << "\n";
-			namee.upgrade();
-			std::cout << "\n";
-			namee.NameGame::shop();
-			x = _getch();
-			Punkty::a();
+		howMuch();
+		system("cls");
+		// name the game
+		namee.name();
+		std::cout << "\nIlosc klikniec: " << pkt << "\n";
+		std::cout << "\n";
+		namee.upgrade();
+		std::cout << "\n";
+		namee.shop();
+		x = _getch();
+		addPoints();
 	}
 }
 
-void Punkty::zabierz(int ile)
+void  Points::removePoint(int ile)
 {
 	punkty.open("punkty.txt", std::ios::out);
 	pkt -= ile;
@@ -64,14 +61,13 @@ void Punkty::zabierz(int ile)
 	punkty.close();
 }
 
-void Punkty::a()
+void  Points::addPoints()
 {
 	NameGame namee;
 	switch (x)
 	{
 		case (32):
 		{
-			xxx();
 			punkty.open("punkty.txt", std::ios::out);
 			pkt += click;
 			punkty << pkt;
@@ -87,24 +83,24 @@ void Punkty::a()
 				up.open("up1.txt");
 				if (up)
 				{
-					namee.NameGame::maszJuz();
+					namee.alreadyHave();
 					up.close();
 				}
 				else
 				{
 					up.close();
-					zabierz(169);
+					payment(169);
 					up.open("up1.txt", std::ios::out);
 					up.close();
 					punkty.close();
-					namee.NameGame::zakupione();
+					namee.bought();
 					click = 2;
 				}
 				
 			}
 			else
 			{
-				namee.zaMalo();
+				namee.notEnough();
 				punkty.close();
 			}
 			break;
@@ -118,23 +114,23 @@ void Punkty::a()
 				up.open("up2.txt");
 				if (up)
 				{
-					namee.NameGame::maszJuz();
+					namee.alreadyHave();
 					up.close();
 				}
 				else
 				{
 					up.close();
-					zabierz(569);
+					payment(569);
 					up.open("up2.txt", std::ios::out);
 					up.close();
 					punkty.close();
-					namee.NameGame::zakupione();
+					namee.bought();
 					click = 3;
 				}
 			}
 			else
 			{
-				namee.zaMalo();
+				namee.notEnough();
 				punkty.close();
 			}
 			break;
@@ -148,23 +144,23 @@ void Punkty::a()
 				up.open("up3.txt");
 				if (up)
 				{
-					namee.NameGame::maszJuz();
+					namee.alreadyHave();
 					up.close();
 				}
 				else
 				{
 					up.close();
-					zabierz(969);
+					payment(969);
 					up.open("up3.txt", std::ios::out);
 					up.close();
 					punkty.close();
-					namee.NameGame::zakupione();
+					namee.bought();
 					click = 5;
 				}
 			}
 			else
 			{
-				namee.zaMalo();
+				namee.notEnough();
 				punkty.close();
 			}
 			break;
@@ -178,23 +174,23 @@ void Punkty::a()
 				up.open("up4.txt");
 				if (up)
 				{
-					namee.NameGame::maszJuz();
+					namee.alreadyHave();
 					up.close();
 				}
 				else
 				{
 					up.close();
-					zabierz(1369);
+					payment(1369);
 					up.open("up4.txt", std::ios::out);
 					up.close();
 					punkty.close();
-					namee.NameGame::zakupione();
+					namee.bought();
 					click = 7;
 				}
 			}
 			else
 			{
-				namee.zaMalo();
+				namee.notEnough();
 				punkty.close();
 			}
 			break;
@@ -208,23 +204,23 @@ void Punkty::a()
 				up.open("up5.txt");
 				if (up)
 				{
-					namee.NameGame::maszJuz();
+					namee.alreadyHave();
 					up.close();
 				}
 				else
 				{
 					up.close();
-					zabierz(1669);
+					payment(1669);
 					up.open("up5.txt", std::ios::out);
 					up.close();
 					punkty.close();
-					namee.NameGame::zakupione();
+					namee.bought();
 					click = 9;
 				}
 			}
 			else
 			{
-				namee.zaMalo();
+				namee.notEnough();
 				punkty.close();
 			}
 			break;
@@ -235,7 +231,7 @@ void Punkty::a()
 			punkty.open("punkty.txt", std::ios::out);
 			if (pkt >= 10000)
 			{
-				namee.NameGame::zakupione();
+				namee.bought();
 				remove("up1.txt");
 				remove("up2.txt");
 				remove("up3.txt");
@@ -243,11 +239,11 @@ void Punkty::a()
 				remove("up5.txt");
 				punkty.close();
 				is();
-				zabierz(pkt);
+				payment(pkt);
 			}
 			else
 			{
-				namee.zaMalo();
+				namee.notEnough();
 				punkty.close();
 			}
 			break;
@@ -255,7 +251,7 @@ void Punkty::a()
 	}
 }
 
-void Punkty::is()
+void Points::is()
 {
 	up.open("up1.txt");
 	if (up)
@@ -309,10 +305,4 @@ void Punkty::is()
 		up.close();
 	}
 
-}
-
-float Punkty::xxx()
-{
-	float a = pkt;
-	return pkt;
 }

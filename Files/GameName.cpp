@@ -37,7 +37,7 @@ void NameGame::upgrade()
     std::cout << "5. Upgrade 5 - Cena 1669 klikniec - dodaje 8 - kliknij D aby zakupic" << std::endl;
 }
 
-void NameGame::zaMalo()
+void NameGame::notEnough()
 {
     SetConsoleTextAttribute(hConsole, 3);
     std::cout << "Masz za malo klikniec!" << std::endl;
@@ -46,7 +46,7 @@ void NameGame::zaMalo()
     system("cls");
 }
 
-void NameGame::maszJuz()
+void NameGame::alreadyHave()
 {
     SetConsoleTextAttribute(hConsole, 3);
     std::cout << "Masz to juz!!" << std::endl;
@@ -54,7 +54,7 @@ void NameGame::maszJuz()
     Sleep(300);
     system("cls");
 }
-void NameGame::zakupione()
+void NameGame::bought()
 {
     SetConsoleTextAttribute(hConsole, 3);
     std::cout << "Zakupiono :D" << std::endl;
@@ -69,8 +69,6 @@ void NameGame::shop()
     std::cout << "-------- SKLEP --------" << std::endl;
     SetConsoleTextAttribute(hConsole, 15);
     std::cout << "1. Reset gry - Cena 10 000 klikniec - kliknij J aby zakupic" << std::endl;
-    //std::cout << "2. Instrukcja tworzenia portalu nieskonczonosci - Cena 20 000 klikniec- - kliknij T aby zakupic" << std::endl;
-    //std::cout << "3. Dowolne DLC - Cena 100 000 klikniec - kliknij V aby zakupic" << std::endl;
 
 }
 

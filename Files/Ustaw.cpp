@@ -1,19 +1,19 @@
 #include <iostream>
-#include "Ustaw.h"
 #include <Windows.h>
 #include <cstdlib>
+#include "Ustaw.h"
 
-void Ustaw::ustaw()
+void SetOptions::set()
 {
 	plik.open("ustawiono.txt", std::ios::out);
 	plik.close();
 	exit(0);
 }
 
-bool Ustaw::isTrue()
+bool SetOptions::isTrue()
 {
-	plik.open("ustawiono.txt", std::ios::in);
-	if (plik.good() == true)
+	plik.open("ustawiono.txt");
+	if (plik.good())
 	{
 		plik.close();
 		return true;
@@ -21,7 +21,7 @@ bool Ustaw::isTrue()
 	else
 	{
 		plik.close();
-		ustaw();
+		set();
 		return false;
 	}
 }

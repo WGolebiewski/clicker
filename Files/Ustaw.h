@@ -1,11 +1,11 @@
 #include <iostream>
 #include <fstream>
 
-class Ustaw
+class SetOptions
 {
 private:
 	std::fstream plik;
 public:
-	void ustaw();
+	void set();
 	bool isTrue();
 };

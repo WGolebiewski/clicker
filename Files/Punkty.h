@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 
-class Punkty 
+class Points
 {
 private:
 
@@ -11,11 +11,10 @@ private:
 	int l = 0;
 	std::fstream punkty,up;
 public:
-	void dodaj();
-	void zabierz(int ile);
+	void add();
+	void removePoint(int ile);
 	int howMuch();
-	void a();
-	float xxx();
+	void addPoints();
 	void is();
-	void wplac(int ilee);
+	void payment(int ilee);
 };

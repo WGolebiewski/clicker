@@ -10,8 +10,8 @@ private:
 public:
 	void name();
 	void upgrade();
-	void maszJuz();
-	void zaMalo();
+	void alreadyHave();
+	void notEnough();
 	void shop();
-	void zakupione();
+	void bought();
 };
