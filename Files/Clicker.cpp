@@ -1,6 +1,6 @@
 ﻿#include <iostream>
-#include "Ustaw.h"
-#include "Punkty.h"
+#include "Set.h"
+#include "Points.h"
 #include <time.h>
 #include <cstdlib>
 
