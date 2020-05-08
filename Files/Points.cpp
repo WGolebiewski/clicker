@@ -53,10 +53,10 @@ void  Points::add()
 	}
 }
 
-void Points::removePoint(int ile)
+void Points::removePoint(int howMuch)
 {
 	points.open("points.txt", std::ios::out);
-	pkt -= ile;
+	pkt -= howMuch;
 	points << pkt;
 	points.close();
 }
