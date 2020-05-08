@@ -13,12 +13,12 @@
 void Points::payment(int howMuch)
 {
 	points.open("points.txt", std::ios::in);
-	std::string linia;
-	getline(points, linia);
-	pkt = stoi(linia);
+	std::string line;
+	getline(points, line);
+	std::istringstream(line) >> pkt;
 	points.close();
 	points.open("points.txt", std::ios::out);
-	pkt = pkt + howMuch;
+	pkt = pkt - howMuch;
 	points << pkt;
 	points.close();
 	system("cls");
