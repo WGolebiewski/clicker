@@ -8,7 +8,7 @@
 #include <sstream>
 #include <filesystem>
 #include "GameName.h"
-
+#include "Boss.h"
 
 void Points::payment(int howMuch)
 {
@@ -53,12 +53,26 @@ void  Points::add()
 	}
 }
 
-void Points::removePoint(int howMuch)
+/*void Points::removePoint(int howMuch)
 {
 	points.open("points.txt", std::ios::out);
 	pkt -= howMuch;
 	points << pkt;
 	points.close();
+}*/
+
+void Points::addPoint(int howMuch)
+{
+	points.open("points.txt", std::ios::in);
+	std::string line;
+	getline(points, line);
+	std::istringstream(line) >> pkt;
+	points.close();
+	points.open("points.txt", std::ios::out);
+	pkt += howMuch;
+	points << pkt;
+	points.close();
+	system("cls");
 }
 
 void  Points::addPoints()
@@ -80,7 +94,7 @@ void  Points::addPoints()
 			points.open("points.txt", std::ios::out);
 			if (pkt >= 169)
 			{
-				upgrade.open("up1.txt");
+				upgrade.open("up1");
 				if (upgrade)
 				{
 					namee.alreadyHave();
@@ -90,7 +104,7 @@ void  Points::addPoints()
 				{
 					upgrade.close();
 					payment(169);
-					upgrade.open("up1.txt", std::ios::out);
+					upgrade.open("up1", std::ios::out);
 					upgrade.close();
 					points.close();
 					namee.bought();
@@ -111,7 +125,7 @@ void  Points::addPoints()
 			points.open("points.txt", std::ios::out);
 			if (pkt >= 569)
 			{
-				upgrade.open("up2.txt");
+				upgrade.open("up2");
 				if (upgrade)
 				{
 					namee.alreadyHave();
@@ -121,7 +135,7 @@ void  Points::addPoints()
 				{
 					upgrade.close();
 					payment(569);
-					upgrade.open("up2.txt", std::ios::out);
+					upgrade.open("up2", std::ios::out);
 					upgrade.close();
 					points.close();
 					namee.bought();
@@ -141,7 +155,7 @@ void  Points::addPoints()
 			points.open("points.txt", std::ios::out);
 			if (pkt >= 969)
 			{
-				upgrade.open("up3.txt");
+				upgrade.open("up3");
 				if (upgrade)
 				{
 					namee.alreadyHave();
@@ -151,7 +165,7 @@ void  Points::addPoints()
 				{
 					upgrade.close();
 					payment(969);
-					upgrade.open("up3.txt", std::ios::out);
+					upgrade.open("up3", std::ios::out);
 					upgrade.close();
 					points.close();
 					namee.bought();
@@ -171,7 +185,7 @@ void  Points::addPoints()
 			points.open("points.txt", std::ios::out);
 			if (pkt >= 1369)
 			{
-				upgrade.open("up4.txt");
+				upgrade.open("up4");
 				if (upgrade)
 				{
 					namee.alreadyHave();
@@ -181,7 +195,7 @@ void  Points::addPoints()
 				{
 					upgrade.close();
 					payment(1369);
-					upgrade.open("up4.txt", std::ios::out);
+					upgrade.open("up4", std::ios::out);
 					upgrade.close();
 					points.close();
 					namee.bought();
@@ -201,7 +215,7 @@ void  Points::addPoints()
 			points.open("points.txt", std::ios::out);
 			if (pkt >= 1669)
 			{
-				upgrade.open("up5.txt");
+				upgrade.open("up5");
 				if (upgrade)
 				{
 					namee.alreadyHave();
@@ -211,7 +225,7 @@ void  Points::addPoints()
 				{
 					upgrade.close();
 					payment(1669);
-					upgrade.open("up5.txt", std::ios::out);
+					upgrade.open("up5", std::ios::out);
 					upgrade.close();
 					points.close();
 					namee.bought();
@@ -232,14 +246,32 @@ void  Points::addPoints()
 			if (pkt >= 10000)
 			{
 				namee.bought();
-				remove("up1.txt");
-				remove("up2.txt");
-				remove("up3.txt");
-				remove("up4.txt");
-				remove("up5.txt");
+				remove("up1");
+				remove("up2");
+				remove("up3");
+				remove("up4");
+				remove("up5");
 				points.close();
 				is();
 				payment(pkt);
+			}
+			else
+			{
+				namee.notEnough();
+				points.close();
+			}
+			break;
+		}
+		case 'x':
+		case 'X':
+		{
+			Boss sendBoss;
+			points.open("points.txt", std::ios::out);
+			if (pkt >= 15000)
+			{
+				namee.fightStart();
+				payment(15000);
+				sendBoss.hitBoss();
 			}
 			else
 			{
@@ -253,27 +285,27 @@ void  Points::addPoints()
 
 void Points::is()
 {
-	upgrade.open("up1.txt");
+	upgrade.open("up1");
 	if (upgrade)
 	{
 		click = 2;
 		upgrade.close();
-		upgrade.open("up2.txt");
+		upgrade.open("up2");
 		if (upgrade)
 		{
 			click = 3;
 			upgrade.close();
-			upgrade.open("up3.txt");
+			upgrade.open("up3");
 			if (upgrade)
 			{
 				click = 5;
 				upgrade.close();
-				upgrade.open("up4.txt");
+				upgrade.open("up4");
 				if (upgrade)
 				{
 					click = 7;
 					upgrade.close();
-					upgrade.open("up5.txt");
+					upgrade.open("up5");
 					if (upgrade)
 					{
 						click = 9;

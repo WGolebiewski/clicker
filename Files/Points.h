@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include <fstream>
 
@@ -11,11 +12,12 @@ private:
 	int l = 0;
 	std::fstream points,upgrade;
 public:
+	
 	void add();
-	void removePoint(int ile);
+	//void removePoint(int howMuch);
 	int howMuch();
 	void addPoints();
 	void is();
-	void payment(int ilee);
-
+	void payment(int howMuch);
+	void addPoint(int howMuch);
 };

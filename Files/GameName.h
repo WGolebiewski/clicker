@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include <cstdlib>
 #include <Windows.h>
@@ -14,4 +15,6 @@ public:
 	void notEnough();
 	void shop();
 	void bought();
+	void fightStart();
+	void wonMessage();
 };
