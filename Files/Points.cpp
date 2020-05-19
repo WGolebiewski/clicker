@@ -50,16 +50,9 @@ void  Points::add()
 		namee.shop();
 		x = _getch();
 		addPoints();
+		
 	}
 }
-
-/*void Points::removePoint(int howMuch)
-{
-	points.open("points.txt", std::ios::out);
-	pkt -= howMuch;
-	points << pkt;
-	points.close();
-}*/
 
 void Points::addPoint(int howMuch)
 {
@@ -75,17 +68,19 @@ void Points::addPoint(int howMuch)
 	system("cls");
 }
 
-void  Points::addPoints()
+void Points::addPoints()
 {
 	NameGame namee;
 	switch (x)
 	{
 		case (32):
 		{
+			
 			points.open("points.txt", std::ios::out);
 			pkt += click;
 			points << pkt;
 			points.close();
+			
 			break;
 		}
 		case 'b':

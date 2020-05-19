@@ -68,7 +68,7 @@ void NameGame::wonMessage()
 {
     system("cls");
     SetConsoleTextAttribute(hConsole, 14);
-    std::cout << "You won!\n4000 points add to your account!" << std::endl;
+    std::cout << "You won!\n20000 points add to your account!" << std::endl;
     SetConsoleTextAttribute(hConsole, 15);
     Sleep(1500); 
     system("cls");

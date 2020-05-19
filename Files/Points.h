@@ -14,7 +14,6 @@ private:
 public:
 	
 	void add();
-	//void removePoint(int howMuch);
 	int howMuch();
 	void addPoints();
 	void is();
