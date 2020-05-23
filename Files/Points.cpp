@@ -34,7 +34,7 @@ int Points::howMuch()
 	return pkt;
 }
 
-void  Points::add()
+void Points::add()
 {
 	NameGame namee;
 	while (true)
@@ -53,6 +53,14 @@ void  Points::add()
 		
 	}
 }
+
+/*void Points::removePoint(int howMuch)
+{
+	points.open("points.txt", std::ios::out);
+	pkt -= howMuch;
+	points << pkt;
+	points.close();
+}*/
 
 void Points::addPoint(int howMuch)
 {

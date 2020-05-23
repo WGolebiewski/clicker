@@ -31,7 +31,7 @@ void NameGame::upgrade()
     std::cout << "-------- UPGRADE'Y --------" << std::endl;
     SetConsoleTextAttribute(hConsole, 15);
     std::cout << "1. Upgrade 1 - cost 169 clicks - adds 1 - press 'B' to buy" << std::endl;
-    std::cout << "2. Upgrade 2 - cost 569 clicks - adds 2 - press 'A' to buy'" << std::endl;
+    std::cout << "2. Upgrade 2 - cost 569 clicks - adds 2 - press 'A' to buy" << std::endl;
     std::cout << "3. Upgrade 3 - cost 969 clicks - adds 4 - press 'G' to buy" << std::endl;
     std::cout << "4. Upgrade 4 - cost 1369 clicks - adds 6 - press 'R' to buy" << std::endl;
     std::cout << "5. Upgrade 5 - cost 1669 clicks - adds 8 - press 'D' to buy" << std::endl;
