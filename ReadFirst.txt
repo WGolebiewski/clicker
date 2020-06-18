@@ -1,2 +1,6 @@
 Hi. I am a beginner programmer. I wrote an easy clicker. I would like that you rate my game. Sorry for my bad English.
+<<<<<<< HEAD
 Thanks!
+=======
+Thank you! 
+>>>>>>> 0fb0c9150bfd0ba99e5f01ad1aeeb79a18bc9c90
