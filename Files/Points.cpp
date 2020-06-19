@@ -10,7 +10,41 @@
 #include "GameName.h"
 #include "Boss.h"
 
-void Points::payment(int howMuch)
+ // ---> Name speaks for itself <---
+
+void Points::openFileAndLoad(std::fstream &fileName, std::string upgradeName, int howManyPointsPlayerMustHave, int howManyClicksAdd)
+{
+	NameGame namee;
+	fileName.open("points.txt", std::ios::out | std::ios::in);
+	if (pkt >= howManyPointsPlayerMustHave)
+	{
+		upgrade.open(upgradeName);
+		if (upgrade)
+		{
+			namee.alreadyHave(); //This message will be sent, if you alreay have it
+			upgrade.close();
+		}
+		else
+		{
+			upgrade.close();
+			payment(howManyPointsPlayerMustHave); //Here you remove points
+			fileName.open(upgradeName, std::ios::out);
+			upgrade.close();
+			fileName.close();
+			namee.bought(); //This will be sent, if you buy it
+			click = howManyClicksAdd;
+		}
+	}
+	else
+	{
+		namee.notEnough(); //This message will be sent, if you haven't points
+		fileName.close();
+	}
+}
+
+// ---> payment is being used to remove points <---
+
+void Points::payment(int howMany)
 {
 	points.open("points.txt", std::ios::in);
 	std::string line;
@@ -18,13 +52,15 @@ void Points::payment(int howMuch)
 	std::istringstream(line) >> pkt;
 	points.close();
 	points.open("points.txt", std::ios::out);
-	pkt = pkt - howMuch;
+	pkt = pkt - howMany;
 	points << pkt;
 	points.close();
 	system("cls");
 }
 
-int Points::howMuch()
+// ---> The fuction is very important, beacouse here return you how many points is in "points.txt" <---
+
+int Points::howMany()
 {
 	points.open("points.txt", std::ios::in);
 	std::string str;
@@ -34,12 +70,14 @@ int Points::howMuch()
 	return pkt;
 }
 
+// ---> In this place you see your clicks, shop, game name and wait what button you click <---
+
 void Points::add()
 {
 	NameGame namee;
 	while (true)
 	{
-		howMuch();
+		howMany();
 		system("cls");
 		// name the game
 		namee.name();
@@ -50,19 +88,12 @@ void Points::add()
 		namee.shop();
 		x = _getch();
 		addPoints();
-		
 	}
 }
 
-/*void Points::removePoint(int howMuch)
-{
-	points.open("points.txt", std::ios::out);
-	pkt -= howMuch;
-	points << pkt;
-	points.close();
-}*/
+// ---> Here you check how many points you have <---
 
-void Points::addPoint(int howMuch)
+void Points::addPoint(int howMany)
 {
 	points.open("points.txt", std::ios::in);
 	std::string line;
@@ -70,180 +101,59 @@ void Points::addPoint(int howMuch)
 	std::istringstream(line) >> pkt;
 	points.close();
 	points.open("points.txt", std::ios::out);
-	pkt += howMuch;
+	pkt += howMany;
 	points << pkt;
 	points.close();
 	system("cls");
 }
 
+// ----> It's a main function <----
+
 void Points::addPoints()
 {
 	NameGame namee;
+	x = tolower(x); //The x is char, you get this in void Points::add()
 	switch (x)
-	{
+	{	
 		case (32):
 		{
-			
 			points.open("points.txt", std::ios::out);
 			pkt += click;
 			points << pkt;
 			points.close();
-			
 			break;
 		}
 		case 'b':
-		case 'B':
 		{
-			points.open("points.txt", std::ios::out);
-			if (pkt >= 169)
-			{
-				upgrade.open("up1");
-				if (upgrade)
-				{
-					namee.alreadyHave();
-					upgrade.close();
-				}
-				else
-				{
-					upgrade.close();
-					payment(169);
-					upgrade.open("up1", std::ios::out);
-					upgrade.close();
-					points.close();
-					namee.bought();
-					click = 2;
-				}
-				
-			}
-			else
-			{
-				namee.notEnough();
-				points.close();
-			}
+			upNames = "up1";
+			openFileAndLoad(points, upNames, 169, 2);
 			break;
 		}
 		case 'a':
-		case 'A':
 		{
-			points.open("points.txt", std::ios::out);
-			if (pkt >= 569)
-			{
-				upgrade.open("up2");
-				if (upgrade)
-				{
-					namee.alreadyHave();
-					upgrade.close();
-				}
-				else
-				{
-					upgrade.close();
-					payment(569);
-					upgrade.open("up2", std::ios::out);
-					upgrade.close();
-					points.close();
-					namee.bought();
-					click = 3;
-				}
-			}
-			else
-			{
-				namee.notEnough();
-				points.close();
-			}
+			upNames = "up2";
+			openFileAndLoad(points, upNames, 569, 3);
 			break;
 		}
 		case 'g':
-		case 'G':
 		{
-			points.open("points.txt", std::ios::out);
-			if (pkt >= 969)
-			{
-				upgrade.open("up3");
-				if (upgrade)
-				{
-					namee.alreadyHave();
-					upgrade.close();
-				}
-				else
-				{
-					upgrade.close();
-					payment(969);
-					upgrade.open("up3", std::ios::out);
-					upgrade.close();
-					points.close();
-					namee.bought();
-					click = 5;
-				}
-			}
-			else
-			{
-				namee.notEnough();
-				points.close();
-			}
+			upNames = "up3";
+			openFileAndLoad(points, upNames, 969, 5);
 			break;
 		}
 		case 'r':
-		case 'R':
 		{
-			points.open("points.txt", std::ios::out);
-			if (pkt >= 1369)
-			{
-				upgrade.open("up4");
-				if (upgrade)
-				{
-					namee.alreadyHave();
-					upgrade.close();
-				}
-				else
-				{
-					upgrade.close();
-					payment(1369);
-					upgrade.open("up4", std::ios::out);
-					upgrade.close();
-					points.close();
-					namee.bought();
-					click = 7;
-				}
-			}
-			else
-			{
-				namee.notEnough();
-				points.close();
-			}
+			upNames = "up4";
+			openFileAndLoad(points, upNames, 1369, 7);
 			break;
 		}
 		case 'd':
-		case 'D':
 		{
-			points.open("points.txt", std::ios::out);
-			if (pkt >= 1669)
-			{
-				upgrade.open("up5");
-				if (upgrade)
-				{
-					namee.alreadyHave();
-					upgrade.close();
-				}
-				else
-				{
-					upgrade.close();
-					payment(1669);
-					upgrade.open("up5", std::ios::out);
-					upgrade.close();
-					points.close();
-					namee.bought();
-					click = 9;
-				}
-			}
-			else
-			{
-				namee.notEnough();
-				points.close();
-			}
+			upNames = "up5";
+			openFileAndLoad(points, upNames, 1669, 9);
 			break;
 		}
 		case 'j':
-		case 'J':
 		{
 			points.open("points.txt", std::ios::out);
 			if (pkt >= 10000)
@@ -266,7 +176,6 @@ void Points::addPoints()
 			break;
 		}
 		case 'x':
-		case 'X':
 		{
 			Boss sendBoss;
 			points.open("points.txt", std::ios::out);
@@ -286,58 +195,21 @@ void Points::addPoints()
 	}
 }
 
+// ----> This is a condition, in which you check if someone bought an upgrade or not <----
+
 void Points::is()
 {
-	upgrade.open("up1");
-	if (upgrade)
+	std::string upName[] = { "up1", "up2", "up3", "up4", "up5" };
+	int p = 1; //The variable is used to set how many clicks program must add
+	click = 1;
+	for (int i = 0; i < 5; i++)
 	{
-		click = 2;
-		upgrade.close();
-		upgrade.open("up2");
+		upgrade.open(upName[i]);
+		if (i >= 1)
+			p += 2;
 		if (upgrade)
-		{
-			click = 3;
-			upgrade.close();
-			upgrade.open("up3");
-			if (upgrade)
-			{
-				click = 5;
-				upgrade.close();
-				upgrade.open("up4");
-				if (upgrade)
-				{
-					click = 7;
-					upgrade.close();
-					upgrade.open("up5");
-					if (upgrade)
-					{
-						click = 9;
-						upgrade.close();
-					}
-					else
-					{
-						upgrade.close();
-					}
-				}
-				else
-				{
-					upgrade.close();
-				}
-			}
-			else
-			{
-				upgrade.close();
-			}
-		}
-		else
-		{
-			upgrade.close();
-		}
-	}
-	else
-	{
-		click = 1;
+			click = p;
 		upgrade.close();
 	}
-
+	p = 1;
 }
