@@ -6,7 +6,7 @@
 class NameGame
 {
 private:
-	HANDLE  hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	std::string up;
 public:
 	void name();
@@ -16,5 +16,8 @@ public:
 	void shop();
 	void bought();
 	void fightStart();
-	void wonMessage();
+	void winMessage();
+	void bossMenu();
+
+	void errorButton();
 };

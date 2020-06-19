@@ -64,11 +64,11 @@ void NameGame::bought()
     system("cls");
 }
 
-void NameGame::wonMessage()
+void NameGame::winMessage()
 {
     system("cls");
     SetConsoleTextAttribute(hConsole, 14);
-    std::cout << "You won!\n20000 points add to your account!" << std::endl;
+    std::cout << "You win!\n20000 points add to your account!" << std::endl;
     SetConsoleTextAttribute(hConsole, 15);
     Sleep(1500); 
     system("cls");
@@ -92,6 +92,17 @@ void NameGame::shop()
     SetConsoleTextAttribute(hConsole, 15);
     std::cout << "1. Game restart - cost: 10 000 clicks - press 'J' to buy" << std::endl;
     std::cout << "2. Boss fight - cost: 15 000 clicks - press 'X' to buy" << std::endl;
+}
 
+void NameGame::bossMenu()
+{
+    SetConsoleTextAttribute(hConsole, 12);
+    std::cout << "======= BOSS =======" << std::endl;
+    SetConsoleTextAttribute(hConsole, 15);
+}
+
+void NameGame::errorButton()
+{
+    SetConsoleTextAttribute(hConsole, 12);
 }
 
