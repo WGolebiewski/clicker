@@ -8,6 +8,7 @@
 
 void Boss::hitBoss()
 {
+	NameGame message;
 	char buttonToClick[] = { 'a', 'A', 'b', 'B', 'C', 'c', 'd', 'D', 'e', 'E', 'f', 'F', 'g', 'G', 'i', 'I', 'j', 'J', 'h', 'H' };
 	char button;
 	int c;
@@ -15,8 +16,11 @@ void Boss::hitBoss()
 	{
 		system("cls");
 		c = rand() % + 20;
-		std::cout << "Boss hp: " << hp;
-		std::cout << "\nBoss breastplate: " << breastplate;
+		message.bossMenu();
+		std::cout << "You must click: " << buttonToClick[c];
+		std::cout << "\nBoss hp: " << hp;
+		std::cout << "\nBoss breastplate: " << breastplate << '\n';
+		message.bossMenu();
 		button = _getch();
 		if(button == buttonToClick[c])
 		{
@@ -36,8 +40,11 @@ void Boss::hitBoss()
 		}
 		else
 		{
-			std::cout << "Boss hp + 10"; hp += 10;
-			std::cout << "Boss breastplate + 10"; breastplate += 10;
+			message.errorButton();
+			std::cout << "\nThis is not a button which you must click!";
+			std::cout << "\nBoss hp + 10"; hp += 10;
+			std::cout << "\nBoss breastplate + 10"; breastplate += 10;
+			Sleep(1000);
 		}
 	}
 	sendWin();
@@ -48,6 +55,6 @@ void Boss::sendWin()
 {
 	NameGame message;
 	Points addPoint;
-	message.wonMessage();
+	message.winMessage();
 	addPoint.addPoint(20000);
 }
