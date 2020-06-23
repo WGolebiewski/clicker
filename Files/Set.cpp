@@ -3,14 +3,14 @@
 #include <cstdlib>
 #include "Set.h"
 
-void SetOptions::set()
+void SetOptions::setFile()
 {
 	setOptions.open("set.txt", std::ios::out);
 	setOptions.close();
 	exit(0);
 }
 
-bool SetOptions::isTrue()
+bool SetOptions::theFileIsExists()
 {
 	setOptions.open("set.txt");
 	if (setOptions.good())
@@ -21,7 +21,7 @@ bool SetOptions::isTrue()
 	else
 	{
 		setOptions.close();
-		set();
+		setFile();
 		return false;
 	}
 }

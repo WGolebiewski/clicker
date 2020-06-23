@@ -3,7 +3,7 @@
 #include <cstdlib>
 #include <Windows.h>
 
-void NameGame::name()
+void NameGame::gameLogo()
 {
     std::cout << ">>>>>>>" << std::endl;
     SetConsoleTextAttribute(hConsole, 12);
@@ -25,10 +25,10 @@ void NameGame::name()
     std::cout << "<<<<<<<" << std::endl;
 }
 
-void NameGame::upgrade()
+void NameGame::upgradeShop()
 {
     SetConsoleTextAttribute(hConsole, 14);
-    std::cout << "-------- UPGRADE'Y --------" << std::endl;
+    std::cout << "-------- UPGRADE'S --------" << std::endl;
     SetConsoleTextAttribute(hConsole, 15);
     std::cout << "1. Upgrade 1 - cost 169 clicks - adds 1 - press 'B' to buy" << std::endl;
     std::cout << "2. Upgrade 2 - cost 569 clicks - adds 2 - press 'A' to buy" << std::endl;
@@ -37,16 +37,7 @@ void NameGame::upgrade()
     std::cout << "5. Upgrade 5 - cost 1669 clicks - adds 8 - press 'D' to buy" << std::endl;
 }
 
-void NameGame::notEnough()
-{
-    SetConsoleTextAttribute(hConsole, 3);
-    std::cout << "You doesn't have enough click!" << std::endl;
-    SetConsoleTextAttribute(hConsole, 15);
-    Sleep(300);
-    system("cls");
-}
-
-void NameGame::alreadyHave()
+void NameGame::youAlreadyBoughtIt()
 {
     SetConsoleTextAttribute(hConsole, 3);
     std::cout << "You already have this!" << std::endl;
@@ -55,12 +46,41 @@ void NameGame::alreadyHave()
     system("cls");
 }
 
-void NameGame::bought()
+void NameGame::youHaveEnoughPoints()
+{
+    SetConsoleTextAttribute(hConsole, 3);
+    std::cout << "You doesn't have enough click!" << std::endl;
+    SetConsoleTextAttribute(hConsole, 15);
+    Sleep(300);
+    system("cls");
+}
+
+void NameGame::shopMenu()
+{
+    SetConsoleTextAttribute(hConsole, 10);
+    std::cout << "-------- SHOP --------" << std::endl;
+    SetConsoleTextAttribute(hConsole, 15);
+    std::cout << "1. Game restart - cost: 10 000 clicks - press 'J' to buy" << std::endl;
+    std::cout << "2. Boss fight - cost: 15 000 clicks - press 'X' to buy" << std::endl;
+}
+
+void NameGame::youBuyIt()
 {
     SetConsoleTextAttribute(hConsole, 3);
     std::cout << "Bought :D" << std::endl;
     SetConsoleTextAttribute(hConsole, 15);
     Sleep(300); 
+    system("cls");
+}
+
+void NameGame::startFightWithBoss()
+{
+    SetConsoleTextAttribute(hConsole, 3);
+    std::cout << "YES! You buy boss fight!" << std::endl;
+    Sleep(1000);
+    std::cout << "Fight start!";
+    SetConsoleTextAttribute(hConsole, 15);
+    Sleep(300);
     system("cls");
 }
 
@@ -72,26 +92,6 @@ void NameGame::winMessage()
     SetConsoleTextAttribute(hConsole, 15);
     Sleep(1500); 
     system("cls");
-}
-
-void NameGame::fightStart()
-{
-    SetConsoleTextAttribute(hConsole, 3);
-    std::cout << "YES! You buy boss fight!" << std::endl;
-    Sleep(1000);
-    std::cout << "Fight start!";
-    SetConsoleTextAttribute(hConsole, 15);
-    Sleep(300);
-    system("cls");
-}
-
-void NameGame::shop()
-{
-    SetConsoleTextAttribute(hConsole, 10);
-    std::cout << "-------- SHOP --------" << std::endl;
-    SetConsoleTextAttribute(hConsole, 15);
-    std::cout << "1. Game restart - cost: 10 000 clicks - press 'J' to buy" << std::endl;
-    std::cout << "2. Boss fight - cost: 15 000 clicks - press 'X' to buy" << std::endl;
 }
 
 void NameGame::bossMenu()

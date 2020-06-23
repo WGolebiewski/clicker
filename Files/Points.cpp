@@ -21,7 +21,7 @@ void Points::openFileAndLoad(std::fstream &fileName, std::string upgradeName, in
 		upgrade.open(upgradeName);
 		if (upgrade)
 		{
-			namee.alreadyHave(); //This message will be sent, if you alreay have it
+			namee.youAlreadyBoughtIt(); //This message will be sent, if you alreay have it
 			upgrade.close();
 		}
 		else
@@ -31,13 +31,13 @@ void Points::openFileAndLoad(std::fstream &fileName, std::string upgradeName, in
 			fileName.open(upgradeName, std::ios::out);
 			upgrade.close();
 			fileName.close();
-			namee.bought(); //This will be sent, if you buy it
+			namee.youBuyIt(); //This will be sent, if you buy it
 			click = howManyClicksAdd;
 		}
 	}
 	else
 	{
-		namee.notEnough(); //This message will be sent, if you haven't points
+		namee.youHaveEnoughPoints(); //This message will be sent, if you haven't points
 		fileName.close();
 	}
 }
@@ -80,12 +80,12 @@ void Points::add()
 		howMany();
 		system("cls");
 		// name the game
-		namee.name();
+		namee.gameLogo();
 		std::cout << "\nClicks: " << pkt << "\n";
 		std::cout << "\n";
-		namee.upgrade();
+		namee.upgradeShop();
 		std::cout << "\n";
-		namee.shop();
+		namee.shopMenu();
 		x = _getch();
 		addPoints();
 	}
@@ -158,19 +158,19 @@ void Points::addPoints()
 			points.open("points.txt", std::ios::out);
 			if (pkt >= 10000)
 			{
-				namee.bought();
+				namee.youBuyIt();
 				remove("up1");
 				remove("up2");
 				remove("up3");
 				remove("up4");
 				remove("up5");
 				points.close();
-				is();
+				whatUpgradeUserBought();
 				payment(pkt);
 			}
 			else
 			{
-				namee.notEnough();
+				namee.youHaveEnoughPoints();
 				points.close();
 			}
 			break;
@@ -181,13 +181,13 @@ void Points::addPoints()
 			points.open("points.txt", std::ios::out);
 			if (pkt >= 15000)
 			{
-				namee.fightStart();
+				namee.startFightWithBoss();
 				payment(15000);
 				sendBoss.hitBoss();
 			}
 			else
 			{
-				namee.notEnough();
+				namee.youHaveEnoughPoints();
 				points.close();
 			}
 			break;
@@ -197,9 +197,9 @@ void Points::addPoints()
 
 // ----> This is a condition, in which you check if someone bought an upgrade or not <----
 
-void Points::is()
+void Points::whatUpgradeUserBought()
 {
-	std::string upName[] = { "up1", "up2", "up3", "up4", "up5" };
+	const std::string upName[] = { "up1", "up2", "up3", "up4", "up5" };
 	int p = 1; //The variable is used to set how many clicks program must add
 	click = 1;
 	for (int i = 0; i < 5; i++)

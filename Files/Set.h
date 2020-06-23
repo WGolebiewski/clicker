@@ -6,7 +6,7 @@ class SetOptions
 {
 private:
 	std::fstream setOptions;
+	void setFile();
 public:
-	void set();
-	bool isTrue();
+	bool theFileIsExists();
 };

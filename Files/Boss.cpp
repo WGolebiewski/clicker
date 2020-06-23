@@ -2,25 +2,15 @@
 #include <Windows.h>
 #include <conio.h>
 #include "Boss.h"
-#include "GameName.h"
 #include "Points.h"
-
 
 void Boss::hitBoss()
 {
-	NameGame message;
-	char buttonToClick[] = { 'a', 'A', 'b', 'B', 'C', 'c', 'd', 'D', 'e', 'E', 'f', 'F', 'g', 'G', 'i', 'I', 'j', 'J', 'h', 'H' };
 	char button;
-	int c;
 	while (hp >= 0 && breastplate >= 0)
 	{
 		system("cls");
-		c = rand() % + 20;
-		message.bossMenu();
-		std::cout << "You must click: " << buttonToClick[c];
-		std::cout << "\nBoss hp: " << hp;
-		std::cout << "\nBoss breastplate: " << breastplate << '\n';
-		message.bossMenu();
+		logoBossMenu();
 		button = _getch();
 		if(button == buttonToClick[c])
 		{
@@ -40,18 +30,31 @@ void Boss::hitBoss()
 		}
 		else
 		{
-			message.errorButton();
-			std::cout << "\nThis is not a button which you must click!";
-			std::cout << "\nBoss hp + 10"; hp += 10;
-			std::cout << "\nBoss breastplate + 10"; breastplate += 10;
-			Sleep(1000);
+			wrongButtonMessage();
 		}
 	}
-	sendWin();
-
+	sendWinMessage();
 }
 
-void Boss::sendWin()
+void Boss::logoBossMenu()
+{
+	message.bossMenu();
+	std::cout << "You must click: " << buttonToClick[c];
+	std::cout << "\nBoss hp: " << hp;
+	std::cout << "\nBoss breastplate: " << breastplate << '\n';
+	message.bossMenu();
+}
+
+void Boss::wrongButtonMessage()
+{
+	message.errorButton();
+	std::cout << "\nThis is not a button which you must click!";
+	std::cout << "\nBoss hp + 10"; hp += 10;
+	std::cout << "\nBoss breastplate + 10"; breastplate += 10;
+	Sleep(1000);
+}
+
+void Boss::sendWinMessage()
 {
 	NameGame message;
 	Points addPoint;
