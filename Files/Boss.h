@@ -1,20 +1,19 @@
 #pragma once
 #include <iostream>
-#include "GameName.h"
+#include "TextMessage.h"
 
 class Boss
 {
 private:
-	int hp = 700;
+	int helthpoints = 700;
 	int breastplate = 1200;
-
-	void logoBossMenu();
+	void bossMenu();
 	void wrongButtonMessage();
-
-	constexpr static char buttonToClick[] = { 'a', 'A', 'b', 'B', 'C', 'c', 'd', 'D', 'e', 'E', 'f', 'F', 'g', 'G', 'i', 'I', 'j', 'J', 'h', 'H' };
+	constexpr static char buttonForClick[] = { 'a', 'A', 'b', 'B', 'C', 'c', 'd', 'D', 'e', 'E', 'f', 'F', 'g', 'G', 'i', 'I', 'j', 'J', 'h', 'H' };
 	NameGame message;
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 public:
-	int c = rand() % + 20;
+	int numberToTab = rand() % + 20;
 	void hitBoss();
-	void sendWinMessage();
+	void WinMessage();
 };

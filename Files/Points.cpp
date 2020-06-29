@@ -7,209 +7,197 @@
 #include <string>
 #include <sstream>
 #include <filesystem>
-#include "GameName.h"
 #include "Boss.h"
 
- // ---> Name speaks for itself <---
-
-void Points::openFileAndLoad(std::fstream &fileName, std::string upgradeName, int howManyPointsPlayerMustHave, int howManyClicksAdd)
+void Points::openFileAndLoad(std::fstream &fileName, std::string upgradeName, int pointsRequired, int clicksSet)
 {
 	NameGame namee;
 	fileName.open("points.txt", std::ios::out | std::ios::in);
-	if (pkt >= howManyPointsPlayerMustHave)
+	if (points >= pointsRequired)
 	{
 		upgrade.open(upgradeName);
 		if (upgrade)
 		{
-			namee.youAlreadyBoughtIt(); //This message will be sent, if you alreay have it
+			namee.alreadyBought(); 
 			upgrade.close();
 		}
 		else
 		{
 			upgrade.close();
-			payment(howManyPointsPlayerMustHave); //Here you remove points
-			fileName.open(upgradeName, std::ios::out);
-			upgrade.close();
+			payment(pointsRequired);
+			fileName.open(upgradeName, std::ios::out);	
 			fileName.close();
-			namee.youBuyIt(); //This will be sent, if you buy it
-			click = howManyClicksAdd;
+			namee.boughtMessage(); 
+			clicks = clicksSet;
 		}
 	}
 	else
 	{
-		namee.youHaveEnoughPoints(); //This message will be sent, if you haven't points
+		namee.enoughPoints(); 
 		fileName.close();
 	}
 }
 
-// ---> payment is being used to remove points <---
-
 void Points::payment(int howMany)
 {
-	points.open("points.txt", std::ios::in);
+	pointsFile.open("points.txt", std::ios::in);
 	std::string line;
-	getline(points, line);
-	std::istringstream(line) >> pkt;
-	points.close();
-	points.open("points.txt", std::ios::out);
-	pkt = pkt - howMany;
-	points << pkt;
-	points.close();
+	getline(pointsFile, line);
+	std::istringstream(line) >> points;
+	pointsFile.close();
+	pointsFile .open("points.txt", std::ios::out);
+	points -= howMany;
+	pointsFile << points;
+	pointsFile.close();
 	system("cls");
 }
 
-// ---> The fuction is very important, beacouse here return you how many points is in "points.txt" <---
-
-int Points::howMany()
+int Points::pointsCount()
 {
-	points.open("points.txt", std::ios::in);
+	pointsFile.open("points.txt", std::ios::in);
 	std::string str;
-	std::getline(points, str);
-	std::istringstream(str) >> pkt;
-	points.close();
-	return pkt;
+	std::getline(pointsFile, str);
+	std::istringstream(str) >> points;
+	pointsFile.close();
+	return points;
 }
 
-// ---> In this place you see your clicks, shop, game name and wait what button you click <---
-
-void Points::add()
+void Points::mainFuction()
 {
 	NameGame namee;
 	while (true)
 	{
-		howMany();
+		pointsCount();
 		system("cls");
-		// name the game
-		namee.gameLogo();
-		std::cout << "\nClicks: " << pkt << "\n";
+		namee.logo();
+		std::cout << "\nClicks: " << points << "\n";
 		std::cout << "\n";
 		namee.upgradeShop();
 		std::cout << "\n";
 		namee.shopMenu();
-		x = _getch();
-		addPoints();
+		button = _getch();
+		checkButton();
 	}
 }
 
-// ---> Here you check how many points you have <---
-
-void Points::addPoint(int howMany)
+void Points::inflow(int howMany)
 {
-	points.open("points.txt", std::ios::in);
+	pointsFile.open("points.txt", std::ios::in);
 	std::string line;
-	getline(points, line);
-	std::istringstream(line) >> pkt;
-	points.close();
-	points.open("points.txt", std::ios::out);
-	pkt += howMany;
-	points << pkt;
-	points.close();
+	getline(pointsFile, line);
+	std::istringstream(line) >> points;
+	pointsFile.close();
+	pointsFile.open("points.txt", std::ios::out);
+	points += howMany;
+	pointsFile << points;
+	pointsFile.close();
 	system("cls");
 }
 
-// ----> It's a main function <----
-
-void Points::addPoints()
+void Points::checkButton() // 32, 98, 97 etc. are ASCII code!
 {
 	NameGame namee;
-	x = tolower(x); //The x is char, you get this in void Points::add()
-	switch (x)
+	button = tolower(button);
+	switch (button)
 	{	
 		case (32):
 		{
-			points.open("points.txt", std::ios::out);
-			pkt += click;
-			points << pkt;
-			points.close();
+			pointsFile.open("points.txt", std::ios::out);
+			points += clicks;
+			pointsFile << points;
+			pointsFile.close();
 			break;
 		}
-		case 'b':
+		case (98):
 		{
 			upNames = "up1";
-			openFileAndLoad(points, upNames, 169, 2);
+			openFileAndLoad(pointsFile, upNames, 169, 2);
 			break;
 		}
-		case 'a':
+		case (97):
 		{
 			upNames = "up2";
-			openFileAndLoad(points, upNames, 569, 3);
+			openFileAndLoad(pointsFile, upNames, 569, 3);
 			break;
 		}
-		case 'g':
+		case (103):
 		{
 			upNames = "up3";
-			openFileAndLoad(points, upNames, 969, 5);
+			openFileAndLoad(pointsFile, upNames, 969, 5);
 			break;
 		}
-		case 'r':
+		case (114):
 		{
 			upNames = "up4";
-			openFileAndLoad(points, upNames, 1369, 7);
+			openFileAndLoad(pointsFile, upNames, 1369, 7);
 			break;
 		}
-		case 'd':
+		case (100):
 		{
 			upNames = "up5";
-			openFileAndLoad(points, upNames, 1669, 9);
+			openFileAndLoad(pointsFile, upNames, 1669, 9);
 			break;
 		}
-		case 'j':
+		case (106):
 		{
-			points.open("points.txt", std::ios::out);
-			if (pkt >= 10000)
+			pointsFile.open("points.txt", std::ios::out);
+			if (points >= 10000)
 			{
-				namee.youBuyIt();
-				remove("up1");
-				remove("up2");
-				remove("up3");
-				remove("up4");
-				remove("up5");
-				points.close();
-				whatUpgradeUserBought();
-				payment(pkt);
+				resetGame();
+				namee.boughtMessage();
+				pointsFile.close();
 			}
 			else
 			{
-				namee.youHaveEnoughPoints();
-				points.close();
+				namee.enoughPoints();
+				pointsFile.close();
 			}
 			break;
 		}
-		case 'x':
+		case (120):
 		{
 			Boss sendBoss;
-			points.open("points.txt", std::ios::out);
-			if (pkt >= 15000)
+			pointsFile.open("points.txt", std::ios::out);
+			if (points >= 15000)
 			{
-				namee.startFightWithBoss();
+				namee.fightStart();
 				payment(15000);
 				sendBoss.hitBoss();
 			}
 			else
 			{
-				namee.youHaveEnoughPoints();
-				points.close();
+				namee.enoughPoints();
+				pointsFile.close();
 			}
 			break;
 		}
 	}
 }
 
-// ----> This is a condition, in which you check if someone bought an upgrade or not <----
-
-void Points::whatUpgradeUserBought()
+void Points::boughtUpgrade()
 {
 	const std::string upName[] = { "up1", "up2", "up3", "up4", "up5" };
-	int p = 1; //The variable is used to set how many clicks program must add
-	click = 1;
+	int p = 1; 
+	clicks = 1;
 	for (int i = 0; i < 5; i++)
 	{
 		upgrade.open(upName[i]);
 		if (i >= 1)
 			p += 2;
 		if (upgrade)
-			click = p;
+			clicks = p;
 		upgrade.close();
 	}
 	p = 1;
+}
+
+void Points::resetGame()
+{
+	remove("up1");
+	remove("up2");
+	remove("up3");
+	remove("up4");
+	remove("up5");
+	boughtUpgrade();
+	payment(points);
 }

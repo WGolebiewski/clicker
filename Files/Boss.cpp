@@ -7,25 +7,25 @@
 void Boss::hitBoss()
 {
 	char button;
-	while (hp >= 0 && breastplate >= 0)
+	while (helthpoints >= 0 && breastplate >= 0)
 	{
 		system("cls");
-		logoBossMenu();
+		bossMenu();
 		button = _getch();
-		if(button == buttonToClick[c])
+		if(button == buttonForClick[numberToTab])
 		{
-			if (hp <= 0)
+			if (helthpoints <= 0)
 			{
 				breastplate -= 4;
 			}
 			else if (breastplate <= 0)
 			{
-				hp -= 2;
+				helthpoints -= 2;
 			}
 			else
 			{
 				breastplate -= 4;
-				hp -= 2;
+				helthpoints -= 2;
 			}
 		}
 		else
@@ -33,31 +33,31 @@ void Boss::hitBoss()
 			wrongButtonMessage();
 		}
 	}
-	sendWinMessage();
+	WinMessage();
 }
 
-void Boss::logoBossMenu()
+void Boss::bossMenu()
 {
 	message.bossMenu();
-	std::cout << "You must click: " << buttonToClick[c];
-	std::cout << "\nBoss hp: " << hp;
+	std::cout << "You must click: " << buttonForClick[numberToTab];
+	std::cout << "\nBoss hp: " << helthpoints;
 	std::cout << "\nBoss breastplate: " << breastplate << '\n';
 	message.bossMenu();
 }
 
 void Boss::wrongButtonMessage()
 {
-	message.errorButton();
+	SetConsoleTextAttribute(hConsole, 12);
 	std::cout << "\nThis is not a button which you must click!";
-	std::cout << "\nBoss hp + 10"; hp += 10;
+	std::cout << "\nBoss hp + 10"; helthpoints += 10;
 	std::cout << "\nBoss breastplate + 10"; breastplate += 10;
 	Sleep(1000);
 }
 
-void Boss::sendWinMessage()
+void Boss::WinMessage()
 {
 	NameGame message;
 	Points addPoint;
 	message.winMessage();
-	addPoint.addPoint(20000);
+	addPoint.inflow(20000);
 }

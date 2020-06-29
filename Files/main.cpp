@@ -1,5 +1,5 @@
 ﻿#include <iostream>
-#include "Set.h"
+#include "SetGame.h"
 #include "Points.h"
 #include <time.h>
 #include <cstdlib>
@@ -7,10 +7,10 @@
 int main()
 {
     srand(time(0));
-    SetOptions setGame;
-    Points add;
+    SetGame setoption;
+    Points points;
 
-    setGame.theFileIsExists();
-    add.whatUpgradeUserBought();
-    add.add();
+    setoption.FileExists();
+    points.boughtUpgrade();
+    points.mainFuction();
 }
