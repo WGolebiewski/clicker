@@ -1,18 +1,19 @@
 #pragma once
 #include <iostream>
 #include <fstream>
-#include "TextMessage.h"
+#include "GameName.h"
+
 class Points
 {
 private:
 	std::string upNames;
 	unsigned int points = 0;
 	int clicks = 1;
-	char button;
+	int button;
 	std::fstream pointsFile, upgrade;
-	void resetGame();
+	void resetGame(); 
+	int numberColor = 1;
 public:
-
 	void mainFuction();
 	int pointsCount();
 	void openFileAndLoad(std::fstream& fileName, std::string upgradeName, int howManyPointsPlayerMustHave, int howManyClicksAdd);
